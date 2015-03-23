@@ -1,0 +1,18 @@
+#!/bin/bash
+
+for x in $(find . *.jpg); do
+
+file=$x
+date=${file:15:4}-${file:19:2}-${file:21:2}
+time=${file:24:2}:${file:26:2}:${file:28:2}
+
+echo timestamping $x
+convert $x -pointsize 36 -fill red -annotate +22+1920 "$date $time" $x &
+ i=`ps aux |grep ncl |wc -l`
+       until [ $i -lt 50 ]; do
+                i=`ps aux |grep convert |wc -l`
+                echo $i   
+
+        done
+
+done
