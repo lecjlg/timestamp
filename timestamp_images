@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#script to stamp time on files with the following file name format bulletcam1-20150323-130804.jpg
+
 ##look for all jpg files less than 120 minutes old
 for file in $(find . -mmin -120); do
 
@@ -17,14 +19,6 @@ echo timestamping $file_name
 
 #Use convert to add the date and time to the image. This will be in the format YYYY-MM-DD TT:TT
 convert $file -pointsize 36 -fill red -annotate +22+1920 "$date $time" $file
-
-#Count the number of processes running called convert and limit it to 50
- i=`ps aux |grep convert |wc -l`
-       until [ $i -lt 50 ]; do
-                i=`ps aux |grep convert |wc -l`
-                echo $i   
-
-        done
 
 
 done
