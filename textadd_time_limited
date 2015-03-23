@@ -1,13 +1,23 @@
 #!/bin/bash
 
+##look for all jpg files less than 120 minutes old
 for x in $(find . -mmin -120); do
 
 file=$x
+
+#create a variable for the date using filename slicing.
 date=${file:15:4}-${file:19:2}-${file:21:2}
+
+#create a variable for the time using filename slicing.
 time=${file:24:2}:${file:26:2}:${file:28:2}
 
+#print out the name of the file to be processed
 echo timestamping $x
+
+#use convert to add the date and time to the image.
 convert $x -pointsize 36 -fill red -annotate +22+1920 "$date $time" $x &
+
+#count the number of processes running called convert and limit it to 50
  i=`ps aux |grep ncl |wc -l`
        until [ $i -lt 50 ]; do
                 i=`ps aux |grep convert |wc -l`
