@@ -5,7 +5,7 @@ for x in $(find . *.jpg); do
 
 file=$x
 
-#create a variable for date using filename slicing.
+#create a variable for the date using filename slicing.
 date=${file:15:4}-${file:19:2}-${file:21:2}
 
 #create a variable for the time using filename slicing.
